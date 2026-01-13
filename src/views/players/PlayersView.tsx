@@ -44,8 +44,10 @@ const ManagePlayersPage = () => {
       });
       setPlayers(response.data.data);
       setError(null);
-    } catch (err) {
-      setError('Failed to load players.');
+    } catch (err: any) {
+      console.error("Fetch Error:", err);
+      const msg = err.response?.data?.message || err.message || 'Failed to load players.';
+      setError(msg);
     } finally {
       setLoading(false);
     }

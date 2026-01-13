@@ -151,8 +151,10 @@ const NewsList = () => {
             const res = await newsService.getAllNews();
             setNewsList(res.data.data);
             setError(null);
-        } catch (err) {
-            setError("Failed to load News.");
+        } catch (err: any) {
+            console.error("Fetch News Error:", err);
+            const msg = err.response?.data?.message || err.message || "Failed to load News.";
+            setError(msg);
         } finally {
             setLoading(false);
         }
